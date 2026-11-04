@@ -1,0 +1,11 @@
+{
+    "name": "Ondor1224.Httpsgithubcomh8mannavmeshplusgitmaster.Tests",
+    "references": [
+        "Ondor1224.Httpsgithubcomh8mannavmeshplusgitmaster"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": []
+}

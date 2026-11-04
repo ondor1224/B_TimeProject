@@ -1,0 +1,10 @@
+{
+    "name": "Ondor1224.Httpsgithubcomh8mannavmeshplusgitmaster.Editor",
+    "references": [
+      "Ondor1224.Httpsgithubcomh8mannavmeshplusgitmaster"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}
