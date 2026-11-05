@@ -9,14 +9,12 @@ public static class RunData
     public static string Wing = "", GameScene = "";
     public static string[] Slots = { "", "" };
     public static HashSet<string> Owned = new HashSet<string>();
+ 
 
     public static void Reset()
     {
-        Stage = 1;
-        Score = Money = 0;
-        Wing = "";
-        Slots = new[] { "", "" };
-        Owned.Clear();
+        Stage = 1; Score = Money = 0; Wing = "";
+        Slots = new[] { "", "" }; Owned.Clear();
     }
 }
 
@@ -33,11 +31,17 @@ public class GameManager : MonoBehaviour
     public static GameManager I;
     public Transform player;
     public StageData[] stages;
+    public Obstacle obstaclePrefab;
+    public float obsDelay = 2.5f;
     public string hubScene = "Hub";
     public float hp = 100, maxHp = 100, inv = .5f;
     public int bombs = 2, count = 5, moneyPerKill = 10;
     public float spawnDelay = .6f, respawnDelay = .5f, spawnGap = 2.5f, above = 2, follow = 1.5f, spacing = 1.5f;
     public Vector2 stretch = new Vector2(2.5f, 2);
+
+    public SpriteRenderer bgRenderer;
+    public Sprite[] bgSprites;
+
     [HideInInspector] public Vector2 half, center;
     [HideInInspector] public float StageTime, BossRatio;
     [HideInInspector] public int Score, Stage = 1;
@@ -49,6 +53,7 @@ public class GameManager : MonoBehaviour
     StageData St => stages[Stage - 1];
     int killed, spawned;
     float invT, lastX;
+    float scoreTimer;
     Enemy boss;
 
     void Awake()
@@ -61,11 +66,16 @@ public class GameManager : MonoBehaviour
         center = player.position;
         var c = Camera.main;
         half = new Vector2(c.orthographicSize * c.aspect, c.orthographicSize);
+
+        if (Stage >= 1 && Stage <= 3) stages[Stage - 1].total = 20 + Stage * 5;
+        if (bgRenderer && bgSprites != null && bgSprites.Length >= Stage)
+            bgRenderer.sprite = bgSprites[Stage - 1];
     }
 
     void Start()
     {
         StartCoroutine(Wave());
+        if (Stage >= 2 && obstaclePrefab) StartCoroutine(SpawnObstacles());
         Refresh();
     }
 
@@ -77,6 +87,17 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F3)) God = !God;
         if (Input.GetKeyDown(KeyCode.F4)) KillAll();
         if (Input.GetKeyDown(KeyCode.F5)) AddMoney(100);
+
+        if (!Over && !Cleared)
+        {
+            scoreTimer += Time.deltaTime;
+            if (scoreTimer >= 5f)
+            {
+                scoreTimer = 0f;
+                Score += 10; // 5초마다 오를 점수 (원하는 수치로 변경하세요)
+                if (UIManager.I) UIManager.I.Refresh();
+            }
+        }
     }
 
     IEnumerator Wave()
@@ -85,6 +106,15 @@ public class GameManager : MonoBehaviour
         {
             Spawn();
             yield return new WaitForSeconds(spawnDelay);
+        }
+    }
+
+    IEnumerator SpawnObstacles()
+    {
+        while (!Over && !Cleared)
+        {
+            yield return new WaitForSeconds(obsDelay);
+            Instantiate(obstaclePrefab, new Vector2(Random.Range(-half.x + 1, half.x - 1), half.y + 2), Quaternion.identity);
         }
     }
 
@@ -100,7 +130,8 @@ public class GameManager : MonoBehaviour
         lastX = p.x;
         spawned++;
         var es = St.enemies;
-        list.Add(Instantiate(es[Random.Range(0, es.Length)], p, Quaternion.identity));
+        int maxKind = Mathf.Min(es.Length, Stage == 1 ? 3 : Stage == 2 ? 4 : 5);
+        list.Add(Instantiate(es[Random.Range(0, maxKind)], p, Quaternion.identity));
     }
 
     void SpawnBoss()
@@ -115,11 +146,7 @@ public class GameManager : MonoBehaviour
     {
         if (e != boss && !list.Remove(e)) return;
         Score += e.score;
-        if (e == boss)
-        {
-            Clear();
-            return;
-        }
+        if (e == boss) { Clear(); return; }
         killed++;
         Invoke(killed == Total ? nameof(SpawnBoss) : nameof(Spawn), respawnDelay);
         Refresh();
@@ -149,6 +176,7 @@ public class GameManager : MonoBehaviour
         foreach (var e in list) if (e) Destroy(e.gameObject);
         list.Clear();
         if (boss) Destroy(boss.gameObject);
+        foreach (var o in Obstacle.list.ToArray()) if (o) Destroy(o.gameObject);
         BossOn = false;
         ClearBullets();
     }
@@ -183,6 +211,7 @@ public class GameManager : MonoBehaviour
         if (Over || God || Time.time < invT) return;
         invT = Time.time + inv;
         hp = Mathf.Max(0, hp - d);
+        if (player && player.TryGetComponent<Player>(out var p)) p.Flash();
         if (hp == 0)
         {
             Over = true;

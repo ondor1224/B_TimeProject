@@ -1,0 +1,598 @@
+fileFormatVersion: 2
+guid: 0cc824bd506ba5e40af0f2be461bccce
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -407327456579244729
+    second: Enemy_Bullet_Spritesheet_6x3 1_0
+  - first:
+      213: -8070341092745844103
+    second: Enemy_Bullet_Spritesheet_6x3 1_1
+  - first:
+      213: 7113145151077820605
+    second: Enemy_Bullet_Spritesheet_6x3 1_2
+  - first:
+      213: -8902024967049483752
+    second: Enemy_Bullet_Spritesheet_6x3 1_3
+  - first:
+      213: 891616741703767850
+    second: Enemy_Bullet_Spritesheet_6x3 1_4
+  - first:
+      213: 7989889683958578746
+    second: Enemy_Bullet_Spritesheet_6x3 1_5
+  - first:
+      213: -2803966739316797249
+    second: Enemy_Bullet_Spritesheet_6x3 1_6
+  - first:
+      213: 5362309593210580232
+    second: Enemy_Bullet_Spritesheet_6x3 1_7
+  - first:
+      213: -2688715551130118198
+    second: Enemy_Bullet_Spritesheet_6x3 1_8
+  - first:
+      213: 961584629995900713
+    second: Enemy_Bullet_Spritesheet_6x3 1_9
+  - first:
+      213: -7584158068123686272
+    second: Enemy_Bullet_Spritesheet_6x3 1_10
+  - first:
+      213: -5840319361768529400
+    second: Enemy_Bullet_Spritesheet_6x3 1_11
+  - first:
+      213: -320972393677479358
+    second: Enemy_Bullet_Spritesheet_6x3 1_12
+  - first:
+      213: -29393291928200182
+    second: Enemy_Bullet_Spritesheet_6x3 1_13
+  - first:
+      213: 4025064392267893365
+    second: Enemy_Bullet_Spritesheet_6x3 1_14
+  - first:
+      213: 1995612369901399173
+    second: Enemy_Bullet_Spritesheet_6x3 1_15
+  - first:
+      213: 3638856325440716959
+    second: Enemy_Bullet_Spritesheet_6x3 1_16
+  - first:
+      213: 4929485996159912626
+    second: Enemy_Bullet_Spritesheet_6x3 1_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_0
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 337
+        width: 124
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74da45b16d1e85af0800000000000000
+      internalID: -407327456579244729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_1
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 337
+        width: 52
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97a65aed883600090800000000000000
+      internalID: -8070341092745844103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_2
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 339
+        width: 127
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db829cde3d7f6b260800000000000000
+      internalID: 7113145151077820605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_3
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 337
+        width: 117
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81a6b591577a57480800000000000000
+      internalID: -8902024967049483752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_4
+      rect:
+        serializedVersion: 2
+        x: 702
+        y: 337
+        width: 35
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a275b0dd3b8af5c00800000000000000
+      internalID: 891616741703767850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_5
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 337
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3eb8e6d55ac1ee60800000000000000
+      internalID: 7989889683958578746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_6
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 179
+        width: 127
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb0130d4b1f4619d0800000000000000
+      internalID: -2803966739316797249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_7
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 177
+        width: 33
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80d6cfe0a20ca6a40800000000000000
+      internalID: 5362309593210580232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_8
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 177
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac712d0a373cfaad0800000000000000
+      internalID: -2688715551130118198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_9
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 177
+        width: 109
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92f8164502c385d00800000000000000
+      internalID: 961584629995900713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_10
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 177
+        width: 39
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08a231d6b68afb690800000000000000
+      internalID: -7584158068123686272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_11
+      rect:
+        serializedVersion: 2
+        x: 821
+        y: 177
+        width: 117
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80263fadb7403fea0800000000000000
+      internalID: -5840319361768529400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_12
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 19
+        width: 127
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 242a52cfe4dab8bf0800000000000000
+      internalID: -320972393677479358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_13
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 17
+        width: 94
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c17dbe4f2979ff0800000000000000
+      internalID: -29393291928200182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_14
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 17
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57a83333db6ebd730800000000000000
+      internalID: 4025064392267893365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_15
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 17
+        width: 125
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58c295190e6d1bb10800000000000000
+      internalID: 1995612369901399173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_16
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 17
+        width: 40
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f90c39a6c80df7230800000000000000
+      internalID: 3638856325440716959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_Bullet_Spritesheet_6x3 1_17
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 17
+        width: 82
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bacf5e556d096440800000000000000
+      internalID: 4929485996159912626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Enemy_Bullet_Spritesheet_6x3 1_0: -407327456579244729
+      Enemy_Bullet_Spritesheet_6x3 1_1: -8070341092745844103
+      Enemy_Bullet_Spritesheet_6x3 1_10: -7584158068123686272
+      Enemy_Bullet_Spritesheet_6x3 1_11: -5840319361768529400
+      Enemy_Bullet_Spritesheet_6x3 1_12: -320972393677479358
+      Enemy_Bullet_Spritesheet_6x3 1_13: -29393291928200182
+      Enemy_Bullet_Spritesheet_6x3 1_14: 4025064392267893365
+      Enemy_Bullet_Spritesheet_6x3 1_15: 1995612369901399173
+      Enemy_Bullet_Spritesheet_6x3 1_16: 3638856325440716959
+      Enemy_Bullet_Spritesheet_6x3 1_17: 4929485996159912626
+      Enemy_Bullet_Spritesheet_6x3 1_2: 7113145151077820605
+      Enemy_Bullet_Spritesheet_6x3 1_3: -8902024967049483752
+      Enemy_Bullet_Spritesheet_6x3 1_4: 891616741703767850
+      Enemy_Bullet_Spritesheet_6x3 1_5: 7989889683958578746
+      Enemy_Bullet_Spritesheet_6x3 1_6: -2803966739316797249
+      Enemy_Bullet_Spritesheet_6x3 1_7: 5362309593210580232
+      Enemy_Bullet_Spritesheet_6x3 1_8: -2688715551130118198
+      Enemy_Bullet_Spritesheet_6x3 1_9: 961584629995900713
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
