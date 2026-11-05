@@ -5,16 +5,19 @@ using UnityEngine.SceneManagement;
 
 public static class RunData
 {
-    public static int Stage = 1, Score, Money;
-    public static string Wing = "", GameScene = "";
+    public static int Stage = 1, Score, Money, AtkLv, SpdLv, HpLv;
+    public static string Wing = "", GameScene = "Game";
     public static string[] Slots = { "", "" };
     public static HashSet<string> Owned = new HashSet<string>();
- 
+    public static Dictionary<string, int> SkillLv = new Dictionary<string, int>();
+
+    public static int GetSkillLv(string s) => (!string.IsNullOrEmpty(s) && SkillLv.TryGetValue(s, out int lv)) ? lv : 0;
 
     public static void Reset()
     {
-        Stage = 1; Score = Money = 0; Wing = "";
-        Slots = new[] { "", "" }; Owned.Clear();
+        Stage = 1; Score = Money = AtkLv = SpdLv = HpLv = 0;
+        Wing = ""; Slots = new[] { "", "" };
+        Owned.Clear(); SkillLv.Clear();
     }
 }
 
@@ -33,7 +36,7 @@ public class GameManager : MonoBehaviour
     public StageData[] stages;
     public Obstacle obstaclePrefab;
     public float obsDelay = 2.5f;
-    public string hubScene = "Hub";
+    public string hubScene = "Hub", overScene = "GameOver", clearScene = "Clear";
     public float hp = 100, maxHp = 100, inv = .5f;
     public int bombs = 2, count = 5, moneyPerKill = 10;
     public float spawnDelay = .6f, respawnDelay = .5f, spawnGap = 2.5f, above = 2, follow = 1.5f, spacing = 1.5f;
@@ -41,6 +44,9 @@ public class GameManager : MonoBehaviour
 
     public SpriteRenderer bgRenderer;
     public Sprite[] bgSprites;
+    public AudioClip[] stageBgms;
+    public AudioClip bossBgm, hitSfx, bombSfx, skillSfx;
+    public GameObject blackHoleVisualPrefab;
 
     [HideInInspector] public Vector2 half, center;
     [HideInInspector] public float StageTime, BossRatio;
@@ -52,17 +58,21 @@ public class GameManager : MonoBehaviour
     public int Remain => Total - killed;
     StageData St => stages[Stage - 1];
     int killed, spawned;
-    float invT, lastX;
-    float scoreTimer;
+    float invT, lastX, scoreTimer;
+    float[] skillCool = new float[2];
     Enemy boss;
+    public Enemy CurrentBoss => boss;
+    SkillController skillCtrl;
 
     void Awake()
     {
         I = this;
-        Stage = RunData.Stage;
+        Stage = Mathf.Clamp(RunData.Stage, 1, stages.Length);
         Score = RunData.Score;
         RunData.GameScene = SceneManager.GetActiveScene().name;
         Time.timeScale = 1;
+        maxHp += RunData.HpLv * 30;
+        hp = maxHp;
         center = player.position;
         var c = Camera.main;
         half = new Vector2(c.orthographicSize * c.aspect, c.orthographicSize);
@@ -70,10 +80,15 @@ public class GameManager : MonoBehaviour
         if (Stage >= 1 && Stage <= 3) stages[Stage - 1].total = 20 + Stage * 5;
         if (bgRenderer && bgSprites != null && bgSprites.Length >= Stage)
             bgRenderer.sprite = bgSprites[Stage - 1];
+
+        skillCtrl = gameObject.GetComponent<SkillController>();
+        if (!skillCtrl) skillCtrl = gameObject.AddComponent<SkillController>();
     }
 
     void Start()
     {
+        if (stageBgms != null && stageBgms.Length >= Stage)
+            SoundManager.PlayBgm(stageBgms[Stage - 1]);
         StartCoroutine(Wave());
         if (Stage >= 2 && obstaclePrefab) StartCoroutine(SpawnObstacles());
         Refresh();
@@ -81,9 +96,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        center = Vector2.Lerp(center, player.position, follow * Time.deltaTime);
+        if (player) center = Vector2.Lerp(center, player.position, follow * Time.deltaTime);
         if (!Over && !Cleared) StageTime += Time.deltaTime;
-        if (Over && Input.GetKeyDown(KeyCode.R)) Restart();
+        if (Input.GetKeyDown(KeyCode.Q)) UseSkill(0);
+        if (Input.GetKeyDown(KeyCode.E)) UseSkill(1);
         if (Input.GetKeyDown(KeyCode.F3)) God = !God;
         if (Input.GetKeyDown(KeyCode.F4)) KillAll();
         if (Input.GetKeyDown(KeyCode.F5)) AddMoney(100);
@@ -94,10 +110,20 @@ public class GameManager : MonoBehaviour
             if (scoreTimer >= 5f)
             {
                 scoreTimer = 0f;
-                Score += 10; // 5초마다 오를 점수 (원하는 수치로 변경하세요)
-                if (UIManager.I) UIManager.I.Refresh();
+                Score += 10;
+                Refresh();
             }
         }
+    }
+
+    public void UseSkill(int slot)
+    {
+        string s = RunData.Slots[slot];
+        int lv = Mathf.Clamp(RunData.GetSkillLv(s), 1, 3);
+        if (Time.time < skillCool[slot] || string.IsNullOrEmpty(s)) return;
+        SoundManager.PlaySfx(skillSfx);
+        skillCool[slot] = Time.time + skillCtrl.Activate(s, lv);
+        Refresh();
     }
 
     IEnumerator Wave()
@@ -136,6 +162,7 @@ public class GameManager : MonoBehaviour
 
     void SpawnBoss()
     {
+        if (bossBgm) SoundManager.PlayBgm(bossBgm);
         boss = Instantiate(St.boss, new Vector2(0, half.y - 2.5f), Quaternion.identity);
         BossOn = true;
         BossRatio = 1;
@@ -156,17 +183,16 @@ public class GameManager : MonoBehaviour
     {
         AddMoney(killed * moneyPerKill);
         Wipe();
+        RunData.Score = Score;
         if (Stage < stages.Length)
         {
             RunData.Stage = Stage + 1;
-            RunData.Score = Score;
             SceneManager.LoadScene(hubScene);
             return;
         }
-        Time.timeScale = 0;
         Cleared = true;
         CanRank = Ranking.Qualifies(Score);
-        Refresh();
+        SceneManager.LoadScene(clearScene);
     }
 
     void Wipe()
@@ -194,7 +220,6 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        RunData.Reset();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -202,6 +227,7 @@ public class GameManager : MonoBehaviour
     {
         if (bombs <= 0 || Over || Cleared) return;
         bombs--;
+        SoundManager.PlaySfx(bombSfx);
         ClearBullets();
         Refresh();
     }
@@ -209,13 +235,18 @@ public class GameManager : MonoBehaviour
     public void Damage(float d)
     {
         if (Over || God || Time.time < invT) return;
+        if (skillCtrl && skillCtrl.IsReflecting) return;
         invT = Time.time + inv;
         hp = Mathf.Max(0, hp - d);
+        SoundManager.PlaySfx(hitSfx);
         if (player && player.TryGetComponent<Player>(out var p)) p.Flash();
         if (hp == 0)
         {
             Over = true;
-            Time.timeScale = 0;
+            RunData.Stage = Stage;
+            RunData.Score = Score;
+            SceneManager.LoadScene(overScene);
+            return;
         }
         Refresh();
     }
@@ -228,8 +259,8 @@ public class GameManager : MonoBehaviour
 
     public void Submit(string id)
     {
-        if (!Cleared || Ranked) return;
-        if (CanRank) Ranking.Add(string.IsNullOrWhiteSpace(id) ? "PLAYER" : id, Score, Money);
+        if (Ranked) return;
+        if (Ranking.Qualifies(RunData.Score)) Ranking.Add(string.IsNullOrWhiteSpace(id) ? "PLAYER" : id, RunData.Score, RunData.Money);
         Ranked = true;
         Refresh();
     }
