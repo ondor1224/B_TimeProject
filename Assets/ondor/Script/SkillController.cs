@@ -20,6 +20,11 @@ public class SkillController : MonoBehaviour
 
         switch (skill)
         {
+            case "Heal":
+                gm.hp = Mathf.Min(gm.maxHp, gm.hp + 20f + lv * 20f);
+                gm.Refresh();
+                return 12f - lv * 2f;
+
             case "Homing":
                 TriggerHoming(lv);
                 return 12f - lv * 2f;

@@ -77,14 +77,21 @@ public class EndSceneManager : MonoBehaviour
         rankListText.text = s;
     }
 
+    string GetTargetGameScene()
+    {
+        return (string.IsNullOrEmpty(RunData.GameScene) || RunData.GameScene == SceneManager.GetActiveScene().name)
+            ? "Game"
+            : RunData.GameScene;
+    }
+
     public void RetryKeepData()
     {
-        SceneManager.LoadScene(RunData.GameScene);
+        SceneManager.LoadScene(GetTargetGameScene());
     }
 
     public void RestartFromBeginning()
     {
         RunData.Reset();
-        SceneManager.LoadScene(RunData.GameScene);
+        SceneManager.LoadScene(GetTargetGameScene());
     }
 }

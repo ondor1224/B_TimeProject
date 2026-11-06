@@ -66,8 +66,19 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        if (!player)
+        {
+            var p = FindFirstObjectByType<Player>();
+            if (p) player = p.transform;
+        }
+        if (!player)
+        {
+            enabled = false;
+            return;
+        }
+
         I = this;
-        Stage = Mathf.Clamp(RunData.Stage, 1, stages.Length);
+        Stage = (stages != null && stages.Length > 0) ? Mathf.Clamp(RunData.Stage, 1, stages.Length) : 1;
         Score = RunData.Score;
         RunData.GameScene = SceneManager.GetActiveScene().name;
         Time.timeScale = 1;
@@ -75,9 +86,10 @@ public class GameManager : MonoBehaviour
         hp = maxHp;
         center = player.position;
         var c = Camera.main;
-        half = new Vector2(c.orthographicSize * c.aspect, c.orthographicSize);
+        half = c ? new Vector2(c.orthographicSize * c.aspect, c.orthographicSize) : new Vector2(9f, 5f);
 
-        if (Stage >= 1 && Stage <= 3) stages[Stage - 1].total = 20 + Stage * 5;
+        if (stages != null && Stage >= 1 && Stage <= stages.Length && Stage <= 3)
+            stages[Stage - 1].total = 20 + Stage * 5;
         if (bgRenderer && bgSprites != null && bgSprites.Length >= Stage)
             bgRenderer.sprite = bgSprites[Stage - 1];
 
@@ -87,6 +99,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (!player) return;
         if (stageBgms != null && stageBgms.Length >= Stage)
             SoundManager.PlayBgm(stageBgms[Stage - 1]);
         StartCoroutine(Wave());
@@ -100,6 +113,7 @@ public class GameManager : MonoBehaviour
         if (!Over && !Cleared) StageTime += Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Q)) UseSkill(0);
         if (Input.GetKeyDown(KeyCode.E)) UseSkill(1);
+        if (Input.GetKeyDown(KeyCode.Space)) Bomb();
         if (Input.GetKeyDown(KeyCode.F3)) God = !God;
         if (Input.GetKeyDown(KeyCode.F4)) KillAll();
         if (Input.GetKeyDown(KeyCode.F5)) AddMoney(100);
@@ -151,7 +165,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 20; i++)
         {
             p = new Vector2(Random.Range(-half.x + 1, half.x - 1), half.y + 1.5f);
-            if (Mathf.Abs(p.x - lastX) > 1.5f && !list.Exists(e => Vector2.Distance(p, e.transform.position) < spawnGap)) break;
+            if (Mathf.Abs(p.x - lastX) > 1.5f && !list.Exists(e => e && Vector2.Distance(p, e.transform.position) < spawnGap)) break;
         }
         lastX = p.x;
         spawned++;
@@ -214,7 +228,7 @@ public class GameManager : MonoBehaviour
 
     void KillAll()
     {
-        foreach (var e in list.ToArray()) e.TakeDamage(9999);
+        foreach (var e in list.ToArray()) if (e) e.TakeDamage(9999);
         if (boss) boss.TakeDamage(9999);
     }
 
